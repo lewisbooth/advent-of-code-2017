@@ -13,44 +13,44 @@ const input = `116	1470	2610	179	2161	2690	831	1824	2361	1050	2201	118	145	2275	
   799	739	75	1537	82	228	69	1397	1396	1203	1587	63	313	1718	1375	469
   1176	112	1407	136	1482	1534	1384	1202	604	851	190	284	1226	113	114	687
   73	1620	81	1137	812	75	1326	1355	1545	1666	1356	1681	1732	85	128	902
-  571	547	160	237	256	30	496	592	385	576	183	692	192	387	647	233`;
+  571	547	160	237	256	30	496	592	385	576	183	692	192	387	647	233`
 
-// Day 2 Stage 1 - For each row of input, determine the difference between the largest value and the smallest value; the checksum is the sum of all of these differences.
+// Day 2 Stage 1 - For each row of input, determine the difference between the largest value and the smallest value the checksum is the sum of all of these differences.
 function checkSum(input) {
-  const rows = input.split("\n");
-  let rowSums = [];
+  const rows = input.split("\n")
+  let rowSums = []
   rows.forEach((row, i) => {
-    const numbers = row.split("\t").map(number => parseInt(number));
-    let largest = Math.max(...numbers);
-    let smallest = Math.min(...numbers);
-    rowSums.push(largest - smallest);
-  });
-  const result = rowSums.reduce((a, b) => a + b);
-  return result;
+    const numbers = row.split("\t").map(number => parseInt(number))
+    let largest = Math.max(...numbers)
+    let smallest = Math.min(...numbers)
+    rowSums.push(largest - smallest)
+  })
+  const result = rowSums.reduce((a, b) => a + b)
+  return result
 }
 
 // Day 2 Stage 2 - For each row of input, find the only two evenly divisible numbers. Return the sum of the division results from all rows.
 function evenlyDivisibleCheckSum(input) {
-  const rows = input.split("\n");
-  let rowSums = [];
+  const rows = input.split("\n")
+  let rowSums = []
   rows.forEach((row, i) => {
-    const numbers = row.split("\t").map(number => parseInt(number));
+    const numbers = row.split("\t").map(number => parseInt(number))
     numbers.forEach((number, i) => {
       numbers.forEach((otherNumber, j) => {
-        if (i === j) return;
-        const divisionResult = numbers[i] / numbers[j];
+        if (i === j) return
+        const divisionResult = numbers[i] / numbers[j]
         if (Number.isInteger(divisionResult)) {
-          rowSums.push(divisionResult);
+          rowSums.push(divisionResult)
         }
-      });
-    });
-  });
-  const result = rowSums.reduce((a, b) => a + b);
-  return result;
+      })
+    })
+  })
+  const result = rowSums.reduce((a, b) => a + b)
+  return result
 }
 
-const stageOneResult = checkSum(input);
-console.log("Stage One: " + stageOneResult);
+const stageOneResult = checkSum(input)
+console.log("Stage One: " + stageOneResult)
 
-const stageTwoResult = evenlyDivisibleCheckSum(input);
-console.log("Stage Two: " + stageTwoResult);
+const stageTwoResult = evenlyDivisibleCheckSum(input)
+console.log("Stage Two: " + stageTwoResult)
