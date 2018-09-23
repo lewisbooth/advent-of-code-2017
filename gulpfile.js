@@ -5,12 +5,12 @@ var ts = require("gulp-typescript")
 var tsProject = ts.createProject("tsconfig.json")
 
 gulp.task("default", ["typescript"], function () {
-    gulp.watch("*.ts", ['typescript'])
+    gulp.watch("src/*.ts", ['typescript'])
 })
 
 gulp.task("typescript", function () {
     return gulp
-        .src("*.ts")
+        .src("src/*.ts")
         .pipe(plumber())
         .pipe(tsProject())
         .js.pipe(gulp.dest("dist"))
