@@ -13,13 +13,12 @@ const INPUT = 265149
 // 20   7   8   9  10
 // 21  22  23---> ...
 
-// This algorithm avoids looping through individual cells to calculate their positions/values.
+// This algorithm avoids generating the grid cell by cell in memory.
 // Instead, it quickly calculates which loop contains the target number, giving the X distance.
-// The Y distance is found using the length of the target loop.
+// The Y distance is found using the length of the target loop's edges.
 
-// Because of this, the algorithm is fast and uses almost no memory.
-// It solves for '265,149' over 150,000x per second at roughly O(1 + 0.005N).
-// Solving for '265,149' is only ~10x slower than '100'.
+// Because of this, the algorithm is fast - roughly O(1.005N) - and uses almost no memory.
+// Solving for '265,149' is only ~10x slower than solving for '100'.
 
 const stageOne = (target: number): number => {
     if (target <= 1) return 0
@@ -38,10 +37,8 @@ const stageOne = (target: number): number => {
     const loopStartNumber = total - loopLength + 1
     // Y position of loop start number (drops by 1 for each loop, starting on 2nd loop)
     const loopStartNumberYOffset = -(loop - 1)
-    // Difference between loop start number and target
-    const loopTargetOffset = target - loopStartNumber
     // Y offset from loop start number to target
-    const loopTargetYOffset = loopTargetOffset % loopSideLength
+    const loopTargetYOffset = (target - loopStartNumber) % loopSideLength
     // Y offset from target to line 0 (this can be negative, Math.abs() ensures a positive value)
     const targetYOffset =  Math.abs(loopStartNumberYOffset + loopTargetYOffset)
     // Add X and Y distances to get total Manhattan Distance    
@@ -68,15 +65,92 @@ test(stageOne, INPUT, 438)
 // 351   11   23   25   26
 // 362  747  806--->   ...
 
-// For this stage we need a completely different method of generating the grid.
-// This method needs to keep track of all values and positions to calculate the next cell.
+// For this stage we need a completely different approach to generating the grid.
+// We use a 2D object to store the grid because it supports negative keys (i.e 'grid[-1][2]')
 
 const stageTwo = (target:number): number => {
-    if (target <= 1) return 2
-    return 1
-} 
+    // Initialise the grid with the first value of 1 at [0][0]
+    const grid: any = {
+        // X layer
+        0: {
+            // Y layer
+            0: 1
+        }
+    }
+    let x = 1
+    let y = 0
+    let currentValue = 1
+    let currentLoop = 1
+    // The following 4 values are used to calculate the next step in the spiral
+    let loopLength = currentLoop * 8
+    let loopEdgeLength = loopLength / 4
+    let loopPosition = 1
+    let direction = 0
+    // Loop upwards until target is exceeded
+    while (currentValue <= target) {
+        // Calculate the sum of neighbouring cells
+        let newValue = sumNeighbours(x, y, grid)
+        currentValue = newValue
+        // Early return if target is hit (gotta save them nanoseconds)
+        if (currentValue > target) break
+        // Make sure x layer of grid exists
+        if (!grid[x]) {
+            grid[x] = {}
+        }
+        // Save the sum to the grid
+        grid[x][y] = newValue
+        // Calculate direction towards next cell (0 = up, 1 = left etc.)
+        direction = Math.floor(loopPosition / loopEdgeLength)
+        // Increment grid position based on direction
+        if (direction === 0) 
+            y++
+        else if (direction === 1) 
+            x--
+        else if (direction === 2) 
+            y--
+        else 
+            x++            
+        // Increment/reset position counter at the end of each loop
+        if (loopPosition < loopLength) {
+            loopPosition++
+        } else {
+            loopPosition = 1
+        }
+        // When the loop is finished, increment the loop counters and reset the direction
+        if (direction === 4) {
+            currentLoop++
+            loopLength = currentLoop * 8
+            loopEdgeLength = loopLength / 4
+            direction = 1
+        }
+    }
+    return currentValue
+}
+
+// Returns sum of values surrounding the target grid position
+function sumNeighbours(x: number, y: number, grid: any): number {
+    let value = 0
+    if (grid[x]) {
+        // Using '|| 0' returns 0 if the object value is undefined
+        value += grid[x][y + 1] || 0
+        value += grid[x][y - 1] || 0
+    }
+    if (grid[x + 1]) {
+        value += grid[x + 1][y] || 0
+        value += grid[x + 1][y + 1] || 0
+        value += grid[x + 1][y - 1] || 0
+    }
+    if (grid[x - 1]) {
+        value += grid[x - 1][y] || 0
+        value += grid[x - 1][y + 1] || 0
+        value += grid[x - 1][y - 1] || 0
+    }
+    return value
+}
 
 console.log("//---- STAGE 2 ----//")
 test(stageTwo, 1, 2)
 test(stageTwo, 4, 5)
-test(stageTwo, 10, 11)
+test(stageTwo, 23, 25)
+test(stageTwo, 747, 806)
+test(stageTwo, INPUT, 266330)

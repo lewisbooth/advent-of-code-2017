@@ -1,4 +1,5 @@
-// Basic testing function logs the function params followed by PASS or FAIL.
+// Basic importable testing function
+// Logs the function params followed by PASS or FAIL.
 
 export default (func:Function, input:any, target:any) => {
     const result = func(input)
