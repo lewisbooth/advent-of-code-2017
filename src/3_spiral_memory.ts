@@ -92,7 +92,7 @@ const stageTwo = (target:number): number => {
         let newValue = sumNeighbours(x, y, grid)
         currentValue = newValue
         // Early return if target is hit (gotta save them nanoseconds)
-        if (currentValue > target) break
+        if (newValue > target) break
         // Make sure x layer of grid exists
         if (!grid[x]) {
             grid[x] = {}
@@ -101,7 +101,7 @@ const stageTwo = (target:number): number => {
         grid[x][y] = newValue
         // Calculate direction towards next cell (0 = up, 1 = left etc.)
         direction = Math.floor(loopPosition / loopEdgeLength)
-        // Increment grid position based on direction
+        // Adjust grid position based on direction
         if (direction === 0) 
             y++
         else if (direction === 1) 

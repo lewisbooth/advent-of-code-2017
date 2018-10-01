@@ -1,5 +1,4 @@
-export default 
-`kvvfl kvvfl olud wjqsqa olud frc
+export default `kvvfl kvvfl olud wjqsqa olud frc
 slhm rdfm yxb rsobyt rdfm
 pib wzfr xyoakcu zoapeze rtdxt rikc jyeps wdyo hawr xyoakcu hawr
 ismtq qwoi kzt ktgzoc gnxblp dzfayil ftfx asscba ionxi dzfayil qwoi
