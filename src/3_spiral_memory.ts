@@ -39,7 +39,7 @@ const stageOne = (target: number): number => {
     const loopStartNumberYOffset = -(loop - 1)
     // Y offset from loop start number to target
     const loopTargetYOffset = (target - loopStartNumber) % loopSideLength
-    // Y offset from target to line 0 (this can be negative, Math.abs() ensures a positive value)
+    // Y offset from target to line 0 (this can be negative, so Math.abs() ensures a positive value)
     const targetYOffset =  Math.abs(loopStartNumberYOffset + loopTargetYOffset)
     // Add X and Y distances to get total Manhattan Distance    
     return targetYOffset + loop

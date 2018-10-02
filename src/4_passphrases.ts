@@ -19,6 +19,7 @@ const stageOne = (passphrases: string): number => {
         .length
 }
 
+console.log("//---- STAGE 1 ----//")
 test(stageOne, PASSPHRASES, 337, false)
 
 // STAGE 2
@@ -42,11 +43,13 @@ const stageTwo = (passphrases: string): number => {
         .length
 }
 
+console.log("//---- STAGE 2 ----//")
 test(stageTwo, PASSPHRASES, 231, false)
 
 
-
-//////////////////
+////////////////////////////////////////////////////
+// Filter functions are extracted for readability //
+////////////////////////////////////////////////////
 
 function hasDuplicateWords (line: string): boolean {
     let valid = true
