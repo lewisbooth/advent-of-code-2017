@@ -109,19 +109,17 @@ const stageTwo = (target:number): number => {
         else if (direction === 2) 
             y--
         else 
-            x++            
-        // Increment/reset position counter at the end of each loop
-        if (loopPosition < loopLength) {
-            loopPosition++
-        } else {
+            x++
+        // Increment/reset position counter
+        loopPosition++
+        if (loopPosition > loopLength) {
             loopPosition = 1
         }
-        // When the loop is finished, increment the loop counters and reset the direction
+        // Increment loop
         if (direction === 4) {
             currentLoop++
             loopLength = currentLoop * 8
             loopEdgeLength = loopLength / 4
-            direction = 1
         }
     }
     return currentValue
