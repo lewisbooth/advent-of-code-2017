@@ -5,4 +5,4 @@ Use `gulp` to compile all TypeScript into `/dist`. Gulp will watch for changes a
 
 Use `nodemon dist/<filename>.js` to run a file and watch for changes.
 
-Tests are included within each file.
+Basic tests are included within each file.

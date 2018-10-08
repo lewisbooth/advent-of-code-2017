@@ -1,5 +1,5 @@
 import test from "./test"
-import PASSPHRASES from "./4_passphrases_input"
+import PASSPHRASES from "./inputs/4_passphrases_input"
 
 // STAGE 1
 // A passphrase consists of a series of words (lowercase letters) separated by spaces.

@@ -1,5 +1,5 @@
 import test from "./test"
-import INPUT from "./5_maze_jump_input"
+import INPUT from "./inputs/5_maze_jump_input"
 
 // STAGE 1
 // The input contains a list of numbers. 

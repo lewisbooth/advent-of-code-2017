@@ -10,7 +10,7 @@ gulp.task("default", ["typescript"], function () {
 
 gulp.task("typescript", function () {
     return gulp
-        .src("src/*.ts")
+        .src("src/**/*.ts")
         .pipe(plumber())
         .pipe(tsProject())
         .js.pipe(gulp.dest("dist"))
