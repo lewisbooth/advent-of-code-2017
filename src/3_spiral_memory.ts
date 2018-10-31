@@ -94,9 +94,8 @@ const stageTwo = (target:number): number => {
         // Early return if target is hit (gotta save them nanoseconds)
         if (newValue > target) break
         // Make sure x layer of grid exists
-        if (!grid[x]) {
-            grid[x] = {}
-        }
+        if (!grid[x]) 
+            grid[x] = {}        
         // Save the sum to the grid
         grid[x][y] = newValue
         // Calculate direction towards next cell (0 = up, 1 = left etc.)
@@ -112,9 +111,8 @@ const stageTwo = (target:number): number => {
             x++
         // Increment/reset position counter
         loopPosition++
-        if (loopPosition > loopLength) {
-            loopPosition = 1
-        }
+        if (loopPosition > loopLength)
+            loopPosition = 1        
         // Increment loop
         if (direction === 4) {
             currentLoop++
