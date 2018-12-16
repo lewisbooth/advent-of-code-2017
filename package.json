@@ -1,10 +1,10 @@
 {
   "name": "advent-of-code-2017",
   "version": "1.0.0",
-  "description": "Daily challenges from http://adventofcode.com",
+  "description": "Daily challenges from http://adventofcode.com 2017",
   "main": "1_looping_sum.js",
   "scripts": {
-    "start": "echo \"Use `gulp` to start compiling Typescript, then `node dist/<filename>` or `nodemon dist/<filename>` in parallel to run tests for individual files.\" && exit"
+    "start": "echo \"Use `gulp` to start compiling Typescript, then `nodemon dist/<filename>` to run individual files.\""
   },
   "repository": {
     "type": "git",

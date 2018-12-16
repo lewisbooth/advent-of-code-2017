@@ -28,6 +28,35 @@ function stageOne(input: number[]): number {
     return history.length
 }
 
+
+// STAGE 2
+// Continue redistributing slots starting from the first matching state found in Stage 1.
+// How many cycles does it take to create an infinite loop from the Stage 1 result?
+
+function stageTwo(input: number[]): number {
+    // Use the same code as Stage 1
+    let currentState = [...input]
+    let history = []
+    while (!matches(history, currentState)) {
+        history.push(currentState)
+        currentState = cycle(currentState)
+    }
+    // When we find the first match, reset the history and repeat
+    history = []    
+    while (!matches(history, currentState)) {
+        history.push(currentState)
+        currentState = cycle(currentState)
+    }
+    return history.length
+}
+
+test(stageTwo, INPUT, 1610)
+
+
+//////////////////////////////////////////
+//--------- Helper functions ----------//
+/////////////////////////////////////////
+
 // Take highest numbered slot and reallocate it amongst other slots
 function cycle(input: number[]) {
     let bank = [...input]
@@ -61,26 +90,3 @@ function matches(history: number[][], bank: number[]): boolean {
 test(stageOne, [0,2,7,0], 5)
 test(stageOne, INPUT, 3156)
 
-
-// STAGE 2
-// Continue redistributing slots starting from the first matching state found in Stage 1.
-// How many cycles does it take to create an infinite loop from the Stage 1 result?
-
-function stageTwo(input: number[]): number {
-    // Use the same code as Stage 1
-    let currentState = [...input]
-    let history = []
-    while (!matches(history, currentState)) {
-        history.push(currentState)
-        currentState = cycle(currentState)
-    }
-    // When we find the first match, reset the history and repeat
-    history = []    
-    while (!matches(history, currentState)) {
-        history.push(currentState)
-        currentState = cycle(currentState)
-    }
-    return history.length
-}
-
-test(stageTwo, INPUT, 1610)

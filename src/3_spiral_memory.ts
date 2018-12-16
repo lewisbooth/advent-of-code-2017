@@ -127,7 +127,6 @@ const stageTwo = (target:number): number => {
 function sumNeighbours(x: number, y: number, grid: any): number {
     let value = 0
     if (grid[x]) {
-        // Using '|| 0' returns 0 if the object value is undefined
         value += grid[x][y + 1] || 0
         value += grid[x][y - 1] || 0
     }

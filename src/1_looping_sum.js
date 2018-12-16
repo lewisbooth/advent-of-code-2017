@@ -3,6 +3,13 @@ const input =
 
 // Day 1 - Review a sequence of digits and find the sum of all digits that match the next digit in the list. The list is circular, so the digit after the last digit is the first digit in the list.
 
+const stageOne = sumMatches(input)
+console.log("Stage One: " + stageOne)
+
+const rotaryShift = input.length / 2
+const stageTwo = sumMatches(input, rotaryShift)
+console.log("Stage Two: " + stageTwo)
+
 function sumMatches(input, shift = 1) {
   const digits = input.split("")
   const maxIndex = digits.length - 1
@@ -23,10 +30,3 @@ function sumMatches(input, shift = 1) {
   const result = matches.reduce((a, b) => parseInt(a) + parseInt(b))
   return result
 }
-
-const stageOneResult = sumMatches(input)
-console.log("Stage One: " + stageOneResult)
-
-const rotaryShift = input.length / 2
-const stageTwoResult = sumMatches(input, rotaryShift)
-console.log("Stage Two: " + stageTwoResult)
