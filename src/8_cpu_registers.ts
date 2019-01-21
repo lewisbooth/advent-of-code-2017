@@ -101,7 +101,7 @@ function parseInstructions (lines: string[]): Instruction[] {
 }
 
 // Loop through instructions and apply them to the registers
-function applyInstructions(registersInput: any, instructions: Instruction[]): any {
+function applyInstructions(registersInput: any, instructions: Instruction[]): number[] {
     // Avoid mutating original object
     const registers = {...registersInput}
     // Use eval() to execute a text string as JavaScript
