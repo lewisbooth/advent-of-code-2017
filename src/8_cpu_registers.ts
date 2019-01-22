@@ -47,6 +47,7 @@ function stageOne(input: string): number {
     return max
 }
 
+console.log("//---- STAGE 1 ----//")
 test(stageOne, EXAMPLE_INPUT, 1, false)
 test(stageOne, INPUT, 3089, false)
 
@@ -65,6 +66,7 @@ function stageTwo(input: string): number {
     return maxProcessedRegister
 }
 
+console.log("//---- STAGE 2 ----//")
 test(stageTwo, INPUT, 5391, false)
 
 
