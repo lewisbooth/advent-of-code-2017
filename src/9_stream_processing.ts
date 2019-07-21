@@ -63,12 +63,12 @@ function stageOne(input: string): number {
         if (bracket === '{') {
             // Increment the score by the current depth count, then open a new group
             score += depth
-            depth ++
+            depth++
         } else {
             // Close the group and continue
-            depth --
+            depth--
         }
-    })    
+    })
     return score
 }
 
@@ -95,8 +95,8 @@ test(stageOne, INPUT, 21037, false)
 
 // How many non-canceled characters are within the garbage in your puzzle input?
 
-function stageTwo(input:string): number {
-    const garbage = input    
+function stageTwo(input: string): number {
+    const garbage = input
         // Delete all instances of '!' and the following character 
         .replace(/!./g, '')
         // Extract remaining garbage into an array

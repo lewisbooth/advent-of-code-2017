@@ -99,7 +99,7 @@ function stageTwo(input: string): number {
     const rootNode = findRootNode(parsedNodes)
     const nodeTree = buildTree(parsedNodes, rootNode)
     calcWeights(nodeTree)
-    return findFaultyNode(nodeTree)     
+    return findFaultyNode(nodeTree)
 }
 
 console.log("//---- STAGE 2 ----//")
@@ -114,7 +114,7 @@ test(stageTwo, INPUT, 646, false)
 // Parse data from each line of input and return array of Node objects
 function parseNodes(input: string): [Node] {
     const lines = input.split('\n')
-    const parsedNodes:any = []
+    const parsedNodes: any = []
     lines.forEach(line => {
         const weight = parseInt((line.match(/\d+/) || [])[0])
         const title = (line.match(/^[a-z]*/) || [])[0]
@@ -130,10 +130,10 @@ function findRootNode(parsedNodes: [Node]): string {
     let rootNode = ''
     parsedNodes.forEach(node => {
         // Check if node is a child of any other node
-        const parentNode = parsedNodes.filter(otherNode => 
+        const parentNode = parsedNodes.filter(otherNode =>
             otherNode && otherNode.childrenRefs.indexOf(node.title) >= 0
         ).length
-        if (!parentNode) 
+        if (!parentNode)
             rootNode = node.title
     })
     return rootNode
@@ -143,8 +143,8 @@ function findRootNode(parsedNodes: [Node]): string {
 function buildTree(parsedNodes: [Node], nodeTitle: string): any {
     if (!nodeTitle) return
     const { title, weight, childrenRefs } = getNode(parsedNodes, nodeTitle)
-    return { 
-        title, 
+    return {
+        title,
         weight,
         children: childrenRefs.map(child => buildTree(parsedNodes, child))
     }
@@ -152,14 +152,14 @@ function buildTree(parsedNodes: [Node], nodeTitle: string): any {
 
 // Extract the given Node from a flat array of Nodes
 function getNode(parsedNodes: [Node], title: string): Node {
-    return parsedNodes.find(node => 
+    return parsedNodes.find(node =>
         node.title === title
     ) || parsedNodes[0]
 }
 
 // Add sum of child weights to the nested Node object
 function calcWeights(node: Node): any {
-    if (!node.children[0]) 
+    if (!node.children[0])
         return node.weight
     node.totalWeight = node.weight
     node.children.forEach(child => {
@@ -182,7 +182,7 @@ function findFaultyNode(node: Node, correctionOffset: number = 0): number {
         const offset = correctWeight - unbalancedWeight
         const index = childWeights.indexOf(unbalancedWeight)
         return findFaultyNode(node.children[index], offset)
-    // Otherwise return the correct weight to balance the stack
+        // Otherwise return the correct weight to balance the stack
     } else {
         return node.weight + correctionOffset
     }
