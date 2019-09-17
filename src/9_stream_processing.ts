@@ -49,7 +49,6 @@ function stageOne(input: string): number {
         .replace(/!./g, '')
         // Delete anything inside pairs of angle brackets
         // The question mark means 'non-greedy', i.e. matches will stop at the next occurence of '>'
-        // Otherwise it would delete everything between the first and last bracket in the string
         .replace(/<.*?>/g, '')
         // Delete everything else that isn't a bracket
         .replace(/[^{}]/g, '')
